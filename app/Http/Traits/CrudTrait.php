@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 
 trait CrudTrait
@@ -26,7 +27,7 @@ trait CrudTrait
     {
         $where = json_decode($request->get('where', false));
         $sort = json_decode($request->get('sort', false));
-        $relations = json_decode($request->get('relations', false));
+        $relations = json_decode($request->get('relations', []));
         $search = $request->get('search', false);
         $size = $request->get('size', 10);
         $searchFields = isset($this->searchFields) ? $this->searchFields : [];
@@ -56,7 +57,7 @@ trait CrudTrait
             // 分页
             ->paginate($size);
 
-        return $list->toArray();
+        return $list;
     }
 
     public function create()
@@ -103,7 +104,11 @@ trait CrudTrait
             $this->model->destroy(explode(',', $id));
         } else {
             $this->model = $this->model->findOrFail($id);
-            $this->model->$relation()->detach(explode(',',$relation_id));
+            if ($this->model->$relation() instanceof BelongsToMany){
+                $this->model->$relation()->detach(explode(',',$relation_id));
+            } else {
+                $this->model->$relation()->destory(explode(',',$relation_id));
+            }
         }
     }
 }

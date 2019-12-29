@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="supercrud" uuid="fb47ae46-b0e3-4f09-8d38-9aa0a1561996">
+    <data-source source="LOCAL" name="mmzyd" uuid="554f50b7-8ff1-4cdb-a6e6-213137e045cf">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/supercrud</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/mmzyd</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />

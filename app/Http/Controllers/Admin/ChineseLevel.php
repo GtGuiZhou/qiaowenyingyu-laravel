@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ChineseLevelModel;
+use App\ChineseModel;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\CrudTrait;
 
@@ -22,12 +23,21 @@ class ChineseLevel extends Controller
     }
 
 
-    public function indexWord($id)
+
+
+    public function chinese($id)
     {
         $this->model = $this->model->findOrFail($id);
-        $list = $this->model->words()->get();
-
+        $list = $this->model->chinese()->get();
         return $list;
+    }
+
+    public function insertChinese($id,$chinese_id)
+    {
+        $this->model = $this->model->findOrFail($id);
+        $chinese = ChineseModel::findOrFail($chinese_id);
+        $this->model->chinese()->attach($chinese_id);
+        return $chinese;
     }
 
 //    public function createWord(Request $request,$id)
@@ -46,6 +56,8 @@ class ChineseLevel extends Controller
 //
 //        return $wordModel;
 //    }
+
+
 
 
 

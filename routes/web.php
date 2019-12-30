@@ -34,7 +34,15 @@ Route::prefix('admin')
     fastCrudRouter('chinese_libraries',"Admin\ChineseLibrary");
     fastCrudRouter('chinese',"Admin\Chinese");
     fastCrudRouter('chinese_level',"Admin\ChineseLevel");
-    Route::get('chinese_libraries/{id}/chinese',"Admin\ChineseLibrary@chinese");
-    Route::get('chinese_libraries/all',"Admin\ChineseLibrary@all");
-    Route::post('chinese_libraries/{id}/chinese_batch',"Admin\ChineseLibrary@chineseBatch");
+    Route::get('chinese_level/{id}/chinese',"Admin\ChineseLevel@chinese");
+    Route::post('chinese_level/{id}/chinese/{chinese_id}',"Admin\ChineseLevel@insertChinese");
+    Route::get('chinese/all',"Admin\Chinese@all");
+    Route::get('chinese/recognize',"Admin\Chinese@recognize");
+    Route::post('chinese/batch',"Admin\Chinese@batch");
 });
+
+Route::prefix('user')
+//    ->middleware('auth:admin')// 注意要区分不同模块的用户
+    ->group(function () {
+        Route::get('chinese_level/{id}','User\ChineseLevel@getLevel');
+    });

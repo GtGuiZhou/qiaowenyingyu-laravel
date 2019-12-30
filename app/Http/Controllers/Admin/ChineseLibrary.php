@@ -52,10 +52,7 @@ class ChineseLibrary extends Controller
     }
 
 
-    public function all()
-    {
-        $list = $this->model->get();
 
-        return $list;
-    }
+
+
 }

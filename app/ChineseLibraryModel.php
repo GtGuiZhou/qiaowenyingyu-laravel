@@ -15,4 +15,6 @@ class ChineseLibraryModel extends Model
     {
         return $this->hasMany(ChineseModel::class,'library_id','id');
     }
+
+
 }

@@ -60,6 +60,13 @@ trait CrudTrait
         return $list;
     }
 
+    public function all()
+    {
+        $list = $this->model->get();
+
+        return $list;
+    }
+
     public function create()
     {
         $relation = \request()->get('relation',false);

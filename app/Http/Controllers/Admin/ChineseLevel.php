@@ -23,8 +23,6 @@ class ChineseLevel extends Controller
     }
 
 
-
-
     public function chinese($id)
     {
         $this->model = $this->model->findOrFail($id);

@@ -21,7 +21,12 @@ class ChineseLevel extends Controller
     public function getLevel($id)
     {
         $this->model = $this->model->findOrFail($id);
-        $list = $this->model->chinese()->inRandomOrder()->take(4)->get();
+        $list = $this->model->chinese()->inRandomOrder()
+            ->when($this->model->mode == '2-1',function ($query){
+                $query->where('similar_id','<>',0)->with(['similar']);
+            })
+            ->take(4)->get();
+
         return [
             'level' => $this->model,
             'chinese' => $list

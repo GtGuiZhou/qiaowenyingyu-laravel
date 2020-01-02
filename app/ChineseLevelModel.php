@@ -25,4 +25,6 @@ class ChineseLevelModel extends Model
     {
         return $this->belongsToMany(ChineseModel::class,'chinese_chinese_level' ,'chinese_id','level_id','');
     }
+
+
 }

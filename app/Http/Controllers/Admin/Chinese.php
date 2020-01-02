@@ -30,8 +30,9 @@ class Chinese extends Controller
             $name = $file->getClientOriginalName();
             $name = explode('.',$name)[0];
             if ($ext == 'mp3') {
-                $fileModel = FileModel::saveFile($file);
-                $url = $fileModel->url;
+                $fileName = $name.'.mp3';
+                $file->move(public_path('uploads'),$fileName);
+                $url = '/uploads/'.$fileName;
                 $this->model->create( [
                     'text' => $name,
                     'voice' => $url

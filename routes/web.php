@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 function fastCrudRouter($routerName, $controller)
 {
     Route::get("$routerName", "$controller@index");
@@ -31,29 +32,27 @@ Route::prefix('admin')
     ->group(function () {
     Route::put('admins/logout', 'Admin\Admin@logout');
     fastCrudRouter('admins',"Admin\Admin");
-    fastCrudRouter('chinese_libraries',"Admin\ChineseLibrary");
-    fastCrudRouter('chinese',"Admin\Chinese");
-    fastCrudRouter('chinese_level',"Admin\ChineseLevel");
     fastCrudRouter('users',"Admin\User");
-    Route::get('chinese_level/{id}/chinese',"Admin\ChineseLevel@chinese");
-    Route::get('users/{id}/chinese_result',"Admin\User@chineseResult");
-    Route::post('chinese_level/{id}/chinese/{chinese_id}',"Admin\ChineseLevel@insertChinese");
-    Route::get('chinese/all',"Admin\Chinese@all");
-    Route::get('chinese/recognize',"Admin\Chinese@recognize");
-    Route::post('chinese/batch',"Admin\Chinese@batch");
+    fastCrudRouter('words',"Admin\Word");
+
 });
 
 
 Route::any('user/wechat/scope', 'User\WeChat@scope');
 Route::any('user/wechat/redirect', 'User\WeChat@redirect');
 Route::prefix('user')
-    ->middleware('auth:user')// 注意要区分不同模块的用户
+//    ->middleware('auth:user')// 注意要区分不同模块的用户
     ->group(function () {
-        Route::get('chinese_level/{id}','User\ChineseLevel@getLevel');
+        Route::get('words/level/{levelName}','User\Word@level');
         Route::get('users/is_login','User\User@isLogin');
         Route::post('users/submit_info','User\User@submitInfo');
         Route::post('users/submit_score/{score}','User\User@submitScore');
+        Route::get('students','User\Student@index');
     });
 
-
+Route::prefix('api')->group(function () {
+    Route::post('files/upload', 'Api\File@upload');
+    Route::get('files/read/{md5}', 'Api\File@read');
+    Route::get('files/download/{md5}', 'Api\File@download');
+});
 

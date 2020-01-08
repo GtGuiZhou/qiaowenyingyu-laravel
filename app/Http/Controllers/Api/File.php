@@ -22,11 +22,15 @@ class File extends Controller
         $this->model = new FileModel();
     }
 
-    public function upload(FileRequest $request)
+    public function upload(Request $request)
     {
-        $file = $request->file('file');
-        $model = $this->model->saveFile($file);
-        return "/api/files/read/{$model->md5}";
+        $files = $request->file('file');
+        $result = [];
+        foreach ($files as $file){
+            $model = $this->model->saveFile($file);
+            $result[] = "/api/files/read/{$model->md5}";
+        }
+        return $result;
     }
 
     public function read($md5)

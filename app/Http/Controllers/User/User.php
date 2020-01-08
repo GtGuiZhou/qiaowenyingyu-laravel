@@ -23,20 +23,12 @@ class User extends Controller
     {
         $data = $request->input();
         $user = Auth::guard('user')->user();
-        $user->at_school = $data['at_school'];
-        $user->baby_name = $data['baby_name'];
-        $user->school = $data['school'];
-        $user->class = $data['class'];
-        $user->phone = $data['phone'];
-        $user->baby_age = $data['baby_age'];
-        $user->at_area = $data['at_area'];
-        $user->is_save_info = 'yes';
-        $user->save();
+        $data['is_save_info'] = 'yes';
+        $user->fillable($data)->save();
     }
 
-    public function submitScore(Request $request,$score)
+    public function submitScore($score)
     {
-        $data = $request->input();
         $user = Auth::guard('user')->user();
         $user->chineseResult()->create(['score' => $score]);
     }

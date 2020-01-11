@@ -24,7 +24,7 @@ class User extends Controller
         $data = $request->input();
         $user = Auth::guard('user')->user();
         $data['is_save_info'] = 'yes';
-        $user->fillable($data)->save();
+        $user->fill($data)->save();
     }
 
     public function submitScore($score)

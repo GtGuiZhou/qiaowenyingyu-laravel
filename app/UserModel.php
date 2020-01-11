@@ -9,7 +9,7 @@ class UserModel extends Authenticatable
     //
     protected $table = 'user';
     public $timestamps = false;
-    protected $guarded = ['wx_openid'];
+    protected $guarded = [];
 
     public function chineseResult()
     {

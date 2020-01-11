@@ -41,7 +41,7 @@ Route::prefix('admin')
 Route::any('user/wechat/scope', 'User\WeChat@scope');
 Route::any('user/wechat/redirect', 'User\WeChat@redirect');
 Route::prefix('user')
-//    ->middleware('auth:user')// 注意要区分不同模块的用户
+    ->middleware('auth:user')// 注意要区分不同模块的用户
     ->group(function () {
         Route::get('words/level/{levelName}','User\Word@level');
         Route::get('users/is_login','User\User@isLogin');

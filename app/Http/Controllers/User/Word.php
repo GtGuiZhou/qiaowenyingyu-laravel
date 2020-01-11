@@ -21,9 +21,8 @@ class Word extends Controller
 
     public function level($levelName)
     {
-        $word = $this->model
-            ->inRandomOrder()
-            ->whereRaw('FIND_IN_SET(?,level)',[$levelName])->first();
-        return $word;
+        $list = $this->model
+            ->whereRaw('FIND_IN_SET(?,level)',[$levelName])->get();
+        return $list;
     }
 }

@@ -10,9 +10,17 @@ class WordModelObserver
 
     public function creating(WordModel $wordModel)
     {
-        if (WordModel::where('text',$wordModel->text)->count() > 0){
-            throw new ModelInternalException('该单词已存在');
+        if($wordModel->index < 1){
+            throw new ModelInternalException('答案位置不能小于1');
         }
+
+        if ($wordModel->index > strlen($wordModel->text)){
+            throw new ModelInternalException('答案位置不能大于单词字母数量');
+        }
+
+//        if (WordModel::where('text',$wordModel->text)->count() > 0){
+//            throw new ModelInternalException('该单词已存在');
+//        }
     }
 
     /**
